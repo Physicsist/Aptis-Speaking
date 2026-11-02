@@ -1,0 +1,2505 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Aptis Speaking Part 1 - B1 Trainer</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 90px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 12px 14px;
+    }
+
+    /* Header & Stats */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-b1 {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 700;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 6px;
+      font-size: 0.78rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-weight: 600;
+      background: #f1f5f9;
+      color: var(--text-muted);
+    }
+    .stat-pill.hard { background: #fef2f2; color: #dc2626; }
+    .stat-pill.ok { background: #fffbeb; color: #d97706; }
+    .stat-pill.good { background: #ecfdf5; color: #059669; }
+
+    /* Controls & Selector */
+    .controls-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    select.question-select {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      outline: none;
+    }
+
+    .btn-icon {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .btn-icon:active {
+      transform: scale(0.97);
+    }
+
+    /* Mode Switcher */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #e2e8f0;
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+
+    .mode-tab {
+      border: none;
+      background: transparent;
+      padding: 10px 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-tab.active {
+      background: var(--card);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    /* Question Card */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .topic-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    .status-indicator {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .q-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .q-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .btn-speak-q {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: none;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Outline Section */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .outline-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .outline-step strong {
+      color: var(--primary-dark);
+    }
+
+    /* Key Chunks */
+    .chunks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+    }
+
+    .chunk-item {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      padding: 8px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .chunk-item:active {
+      background: #fef3c7;
+    }
+
+    .chunk-en {
+      font-weight: 700;
+      color: #92400e;
+      font-size: 0.9rem;
+    }
+
+    .chunk-vi {
+      font-size: 0.8rem;
+      color: #b45309;
+    }
+
+    /* Sentences List (Mode 1) */
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentence-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: #ffffff;
+      transition: all 0.15s;
+    }
+
+    .sentence-item.playing {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .sentence-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .sentence-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .sentence-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-sm {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .btn-sm.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .sentence-text {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.45;
+      transition: filter 0.2s;
+    }
+
+    .sentence-text.masked {
+      filter: blur(6px);
+      user-select: none;
+    }
+
+    .chunk-highlight {
+      background: #fef08a;
+      padding: 0 3px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Mode 2: Exam Simulation */
+    .timer-box {
+      text-align: center;
+      padding: 16px 12px;
+      background: #0f172a;
+      color: #fff;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .timer-display {
+      font-size: 2.6rem;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 1px;
+      margin: 4px 0;
+    }
+
+    .timer-sub {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #334155;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--success);
+      transition: width 0.1s linear, background-color 0.3s ease;
+    }
+
+    .closing-reminder {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    .exam-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-exam {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+    }
+
+    .btn-start { background: var(--primary); }
+    .btn-stop { background: var(--danger); }
+
+    .audio-playback-box {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .audio-playback-box audio {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    /* SRS Rating Bar */
+    .srs-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .srs-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-srs {
+      padding: 10px 6px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-srs.hard { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+    .btn-srs.ok { background: #fffbeb; color: #d97706; border-color: #fde68a; }
+    .btn-srs.good { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+
+    .btn-srs.selected {
+      transform: scale(0.98);
+      box-shadow: 0 0 0 2px var(--text);
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 10px 14px;
+      z-index: 60;
+    }
+
+    .bottom-nav-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-nav {
+      padding: 12px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .btn-nav.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand-row">
+        <div class="brand-title">
+          <span>🎯 Aptis Speaking Part 1</span>
+          <span class="badge-b1">B1 Target (30s)</span>
+        </div>
+        <select id="voiceRateSelect" class="btn-icon" style="padding: 4px 8px; font-size: 0.78rem;">
+          <option value="0.85">🐢 Tốc độ: 0.85x</option>
+          <option value="0.95" selected>🚶 Tốc độ: 0.95x</option>
+          <option value="1.0">🏃 Tốc độ: 1.0x</option>
+        </select>
+      </div>
+      <div class="stats-bar" id="statsBar">
+        <span class="stat-pill">Tổng: 45 câu</span>
+        <span class="stat-pill hard" id="statHard">Cần luyện lại: 0</span>
+        <span class="stat-pill ok" id="statOk">Tạm ổn: 0</span>
+        <span class="stat-pill good" id="statGood">Thành thạo: 0</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Question Selector & Filter -->
+    <div class="controls-row">
+      <select id="questionSelect" class="question-select"></select>
+      <button class="btn-icon" id="btnToggleLevel" title="Chuyển đổi bài mẫu B1 / B2">🎓 Mức: <span id="currentLevelText">B1</span></button>
+    </div>
+
+    <!-- Mode Switcher -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="tabMode1" onclick="switchMode('shadowing')">📖 1. Luyện từng câu</button>
+      <button class="mode-tab" id="tabMode2" onclick="switchMode('exam')">⏱️ 2. Phòng thi 30s</button>
+    </div>
+
+    <!-- Question Banner -->
+    <div class="card">
+      <div class="q-meta">
+        <span class="topic-tag" id="qTopic">Topic</span>
+        <span class="status-indicator" id="qStatusBadge">Chưa học</span>
+      </div>
+      <div class="q-title-row">
+        <div class="q-title" id="qText">Question text?</div>
+        <button class="btn-speak-q" onclick="speakCurrentQuestion()">🔊 Nghe hỏi</button>
+      </div>
+    </div>
+
+    <!-- Outline Card -->
+    <div class="card">
+      <div class="section-header">
+        <span class="section-title">💡 Dàn ý phản xạ 30s (3 bước)</span>
+        <button class="btn-sm" id="btnToggleOutline" onclick="toggleOutline()">Ẩn dàn ý</button>
+      </div>
+      <div class="outline-steps" id="outlineBox"></div>
+    </div>
+
+    <!-- MODE 1: SHADOWING & MEMORIZING -->
+    <div id="modeShadowingSection">
+      <!-- Key Chunks -->
+      <div class="card">
+        <div class="section-header">
+          <span class="section-title">⭐ Cụm từ ăn điểm B1 (Bấm để nghe)</span>
+        </div>
+        <div class="chunks-grid" id="chunksBox"></div>
+      </div>
+
+      <!-- Sentence by Sentence -->
+      <div class="card">
+        <div class="section-header">
+          <span class="section-title">🗣️ Luyện đọc từng câu (Shadowing)</span>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-sm primary" onclick="playAllSentences()">▶️ Nghe cả bài</button>
+            <button class="btn-sm" id="btnMaskAll" onclick="toggleMaskAll()">🙈 Che toàn bộ</button>
+          </div>
+        </div>
+        <div class="sentence-list" id="sentencesBox"></div>
+      </div>
+    </div>
+
+    <!-- MODE 2: EXAM SIMULATION (30s) -->
+    <div id="modeExamSection" class="hidden">
+      <div class="timer-box">
+        <div class="timer-sub">THỜI GIAN TRẢ LỜI PART 1 (CHUẨN APTIS)</div>
+        <div class="timer-display" id="timerDisplay">30.0s</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="timerBar"></div>
+        </div>
+        <div class="closing-reminder" id="closingReminder">
+          🔔 Còn 5s! Hãy chốt câu kết: "That’s all I want to say. Thank you."
+        </div>
+      </div>
+
+      <div class="exam-controls">
+        <button class="btn-exam btn-start" id="btnStartExam" onclick="startExamSimulation()">
+          🎙️ Bắt đầu trả lời (30s)
+        </button>
+        <button class="btn-exam btn-stop hidden" id="btnStopExam" onclick="stopExamSimulation()">
+          ⏹️ Dừng & Nghe lại
+        </button>
+      </div>
+
+      <div class="audio-playback-box" id="audioPlaybackBox">
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text);">🎧 Bản thu âm của bạn:</div>
+        <audio id="recordedAudio" controls></audio>
+      </div>
+
+      <div class="card" style="margin-top: 12px;">
+        <div class="section-header">
+          <span class="section-title">👀 Đối chiếu bài mẫu</span>
+          <button class="btn-sm primary" onclick="toggleExamSample()">Hiện / Ẩn bài mẫu</button>
+        </div>
+        <div id="examSampleBox" class="hidden" style="margin-top: 10px; line-height: 1.6; font-size: 0.98rem;"></div>
+      </div>
+    </div>
+
+    <!-- SRS Rating -->
+    <div class="srs-card">
+      <div class="section-title">📌 Đánh giá mức độ thuộc câu này (SRS):</div>
+      <div class="srs-buttons">
+        <button class="btn-srs hard" id="srsHard" onclick="rateCurrentQuestion('hard')">🔴 Cần luyện lại</button>
+        <button class="btn-srs ok" id="srsOk" onclick="rateCurrentQuestion('ok')">🟡 Tạm ổn</button>
+        <button class="btn-srs good" id="srsGood" onclick="rateCurrentQuestion('good')">🟢 Thành thạo</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sticky Bottom Navigation -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button class="btn-nav" onclick="prevQuestion()">⬅️ Câu trước</button>
+      <button class="btn-nav primary" onclick="pickSmartRandom()">🎲 Câu ưu tiên (SRS)</button>
+      <button class="btn-nav" onclick="nextQuestion()">Câu tiếp ➡️</button>
+    </div>
+  </nav>
+
+  <script>
+    // =========================================================================
+    // DỮ LIỆU 45 CÂU HỎI APTIS SPEAKING PART 1 (BÁM SÁT TÀI LIỆU PDF)
+    // =========================================================================
+    const APTIS_DATA = [
+      {
+        id: 1,
+        topic: "Weekend / Last night",
+        question: "What did you do last weekend/last night?",
+        outline: [
+          "Hoạt động chính: Đi mua sắm cùng gia đình ở trung tâm thương mại gần nhà.",
+          "Lý do & Chi tiết: Cần mua quần áo mới, mua 1 áo thun và ăn trưa ở nhà hàng nhỏ.",
+          "Cảm xúc & Kết: Thấy vui, thư giãn + That's all I want to say. Thank you."
+        ],
+        sample_b1: [
+          "Last weekend, I went shopping with my family at a shopping centre near my house.",
+          "We chose this activity because we needed some new clothes and wanted to spend time together.",
+          "For example, I bought a new T-shirt, and then we had lunch at a small restaurant.",
+          "I felt happy and relaxed because we had a great time together.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Last weekend, I went shopping with my family at a large shopping centre near my house.",
+          "One of the main reasons was that we wanted to spend some quality time together after a busy week.",
+          "After buying a few clothes, we had lunch at a newly opened restaurant, which served a wide range of local dishes.",
+          "Although the restaurant was quite crowded, we thoroughly enjoyed the food and the friendly service.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "went shopping with my family", vi: "đi mua sắm cùng gia đình" },
+          { en: "spend time together", vi: "dành thời gian bên nhau" },
+          { en: "had lunch at a small restaurant", vi: "ăn trưa tại một nhà hàng nhỏ" },
+          { en: "felt happy and relaxed", vi: "cảm thấy vui vẻ và thư giãn" }
+        ]
+      },
+      {
+        id: 2,
+        topic: "First School",
+        question: "Tell me about the first school you attended.",
+        outline: [
+          "Giới thiệu: Trường tiểu học nhỏ gần nhà, học ở đó 5 năm.",
+          "Chi tiết: Có sân chơi lớn, thường chơi trò chơi cùng bạn bè.",
+          "Cảm nhận: Rất vui vì giáo viên thân thiện và hay giúp đỡ."
+        ],
+        sample_b1: [
+          "The first school I attended was a small primary school near my house.",
+          "I remember it clearly because I studied there for five years.",
+          "The school had a large playground, and I often played games there with my classmates.",
+          "I felt very happy at that school because my teachers were friendly and helpful.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "The first school I attended was a small primary school located within walking distance of my house.",
+          "One of the main reasons I remember it so clearly is that I spent five memorable years there.",
+          "It had a spacious playground where my classmates and I would play together during our breaks.",
+          "Although the facilities were quite basic, the teachers were incredibly supportive and made learning enjoyable.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a small primary school", vi: "một trường tiểu học nhỏ" },
+          { en: "a large playground", vi: "một sân chơi rộng" },
+          { en: "played games there with my classmates", vi: "chơi trò chơi với bạn cùng lớp" },
+          { en: "friendly and helpful", vi: "thân thiện và hay giúp đỡ" }
+        ]
+      },
+      {
+        id: 3,
+        topic: "Testing Room",
+        question: "Describe the room you are in now.",
+        outline: [
+          "Mô tả chung: Đang ở phòng thi, khá rộng, sạch và yên tĩnh.",
+          "Chi tiết đồ vật: Nhiều bàn ghế, mỗi bàn có 1 máy tính và tai nghe để thi Aptis.",
+          "Cảm nhận: Hơi trang trọng và hồi hộp nhẹ nhưng thoải mái và sẵn sàng."
+        ],
+        sample_b1: [
+          "I am in a testing room now. It is quite large, clean and quiet.",
+          "There are several desks and chairs in the room, and each desk has a computer and a pair of headphones.",
+          "I am sitting in front of a computer to take my Aptis test.",
+          "The room feels a little formal, but it is comfortable and well organised.",
+          "I feel slightly nervous, but I am ready to do my best.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "At the moment, I am sitting in a testing room which is specifically designed for computer-based examinations.",
+          "The room is spacious, quiet and well organised, with several computers and pairs of headphones arranged on separate desks.",
+          "I am currently using one of the computers to complete my Aptis test.",
+          "Although the atmosphere feels rather formal and makes me slightly nervous, the room is comfortable and free from distractions.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "in a testing room", vi: "ở trong phòng thi" },
+          { en: "a pair of headphones", vi: "một chiếc tai nghe" },
+          { en: "comfortable and well organised", vi: "thoải mái và sắp xếp gọn gàng" },
+          { en: "ready to do my best", vi: "sẵn sàng làm hết sức mình" }
+        ]
+      },
+      {
+        id: 4,
+        topic: "Travel",
+        question: "Why are you interested in travel?",
+        outline: [
+          "Lý do chính: Thích thăm những nơi mới và tìm hiểu văn hóa khác nhau.",
+          "Ví dụ hoạt động: Thử món ăn địa phương, gặp người mới và chụp ảnh đẹp.",
+          "Lợi ích/Cảm xúc: Giúp thư giãn sau đợt làm việc bận rộn, luôn thấy hào hứng."
+        ],
+        sample_b1: [
+          "I am interested in travel because I enjoy visiting new places and learning about different cultures.",
+          "For example, when I travel, I can try local food, meet new people and take beautiful photos.",
+          "Travelling also helps me relax after a busy period at work.",
+          "I always feel excited when I prepare for a new trip.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I’m particularly interested in travel because it allows me to experience different cultures and broaden my horizons.",
+          "Whenever I visit a new place, I enjoy trying the local cuisine and learning about the way people live.",
+          "Although travelling can sometimes be costly and tiring, I believe the experiences it provides are extremely valuable.",
+          "It also helps me escape from my daily routine and recharge my batteries.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "visiting new places", vi: "thăm những địa điểm mới" },
+          { en: "learning about different cultures", vi: "tìm hiểu các nền văn hóa khác nhau" },
+          { en: "try local food", vi: "thử ẩm thực địa phương" },
+          { en: "after a busy period at work", vi: "sau một giai đoạn làm việc bận rộn" }
+        ]
+      },
+      {
+        id: 5,
+        topic: "Popular Book",
+        question: "What is a popular book in your country that you would recommend?",
+        outline: [
+          "Tên sách: Tôi thấy hoa vàng trên cỏ xanh (Yellow Flowers on the Green Grass).",
+          "Nội dung: Câu chuyện về tuổi thơ và gia đình của hai anh em ở vùng quê.",
+          "Lý do giới thiệu: Đơn giản, cảm động, dễ hiểu, giúp hiểu thêm về làng quê Việt Nam."
+        ],
+        sample_b1: [
+          "A popular book in Vietnam that I would recommend is Yellow Flowers on the Green Grass.",
+          "It is a story about the childhood and family life of two brothers in the countryside.",
+          "I recommend it because the story is simple, touching and easy to understand.",
+          "It also helps readers learn more about rural life in Vietnam. I felt moved when I read it.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "A well-known Vietnamese book that I would highly recommend is Yellow Flowers on the Green Grass, which was written by Nguyen Nhat Anh.",
+          "It follows the childhood experiences of two brothers growing up in the Vietnamese countryside.",
+          "What I appreciate most about the book is the way it explores family relationships, jealousy and forgiveness.",
+          "Although the story is fairly simple, it is deeply moving and offers readers a vivid picture of rural life in Vietnam.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "childhood and family life", vi: "tuổi thơ và cuộc sống gia đình" },
+          { en: "simple, touching and easy to understand", vi: "đơn giản, cảm động và dễ hiểu" },
+          { en: "rural life in Vietnam", vi: "cuộc sống nông thôn ở Việt Nam" },
+          { en: "felt moved", vi: "cảm thấy xúc động" }
+        ]
+      },
+      {
+        id: 6,
+        topic: "Family",
+        question: "Tell me about your family.",
+        outline: [
+          "Thành viên: 4 người (chồng, 2 con và tôi), sống trong ngôi nhà nhỏ ấm cúng.",
+          "Chi tiết: Chồng chăm chỉ, con năng động; cuối tuần hay ăn tối, xem TV hoặc đi chơi.",
+          "Cảm nhận: Yêu gia đình vì luôn thấy hạnh phúc và được chở che."
+        ],
+        sample_b1: [
+          "There are four people in my family: my husband, my two children and me.",
+          "We live together in a small but comfortable house.",
+          "My husband works hard, and my children are friendly and active.",
+          "For example, we often have dinner, watch television or go out together at weekends.",
+          "I love my family because they always make me feel happy and supported.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I come from a close-knit family of four, including my husband, my two children and me.",
+          "Although we are all busy with our own work and studies, we always try to have dinner together and share what happened during the day.",
+          "At weekends, we occasionally go out for a meal or visit our relatives.",
+          "What I value most about my family is that we support one another whenever someone faces a difficult situation.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a small but comfortable house", vi: "ngôi nhà nhỏ nhưng thoải mái" },
+          { en: "friendly and active", vi: "thân thiện và năng động" },
+          { en: "go out together at weekends", vi: "đi chơi cùng nhau vào cuối tuần" },
+          { en: "feel happy and supported", vi: "cảm thấy vui vẻ và được ủng hộ" }
+        ]
+      },
+      {
+        id: 7,
+        topic: "Work or Study",
+        question: "What do you do for work or study?",
+        outline: [
+          "Nghề nghiệp: Giáo viên tiếng Anh tại một trường đại học.",
+          "Công việc chính: Soạn bài, dạy học và giúp sinh viên cải thiện kỹ năng nói & ngữ pháp.",
+          "Cảm nhận: Đôi khi mệt nhưng rất vui khi thấy học trò tiến bộ."
+        ],
+        sample_b1: [
+          "I work as an English teacher at a university.",
+          "My main job is to prepare lessons, teach classes and help my students improve their English skills.",
+          "For example, I often teach speaking and grammar to young adults.",
+          "I enjoy my work because I can share my knowledge and meet many interesting students.",
+          "Sometimes it is tiring, but I feel happy when my students make progress.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I currently work as an English lecturer at a university, where I am responsible for planning lessons, teaching classes and assessing my students’ progress.",
+          "What I find most rewarding about my job is being able to help students become more confident in using English.",
+          "Although teaching can be demanding, particularly when I have several classes to prepare for, seeing my students improve makes the effort worthwhile.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "prepare lessons", vi: "soạn bài giảng" },
+          { en: "improve their English skills", vi: "cải thiện kỹ năng tiếng Anh" },
+          { en: "share my knowledge", vi: "chia sẻ kiến thức" },
+          { en: "make progress", vi: "tiến bộ" }
+        ]
+      },
+      {
+        id: 8,
+        topic: "Food in Vietnam",
+        question: "What is the food like in your country?",
+        outline: [
+          "Đặc điểm chung: Đồ ăn Việt Nam ngon và đa dạng (rau tươi, cơm, thịt, rau thơm).",
+          "Ví dụ món ăn: Phở, bánh mì, nem rán (spring rolls).",
+          "Cảm nhận: Ngon miệng, không quá ngấy, mỗi vùng có hương vị thú vị riêng."
+        ],
+        sample_b1: [
+          "The food in Vietnam is delicious and varied.",
+          "It usually includes fresh vegetables, rice, meat and different kinds of herbs.",
+          "For example, some popular Vietnamese dishes are pho, banh mi and spring rolls.",
+          "I like Vietnamese food because it is tasty and not usually too heavy.",
+          "The flavours are different in each region, so there are many interesting dishes to try.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Vietnamese food is incredibly diverse and is generally known for its fresh ingredients and well-balanced flavours.",
+          "One of the things that makes it special is the combination of herbs, vegetables, meat and traditional sauces.",
+          "For instance, dishes such as pho and banh mi are popular with both local people and international visitors.",
+          "Although each region has its own specialities, Vietnamese cuisine is usually flavourful, affordable and relatively healthy.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "delicious and varied", vi: "ngon và đa dạng" },
+          { en: "fresh vegetables", vi: "rau củ tươi" },
+          { en: "not usually too heavy", vi: "thường không quá ngấy/nặng bụng" },
+          { en: "different in each region", vi: "khác nhau ở mỗi vùng miền" }
+        ]
+      },
+      {
+        id: 9,
+        topic: "Feeling Stressed",
+        question: "When do you feel stressed?",
+        outline: [
+          "Hoàn cảnh: Khi có quá nhiều việc phải hoàn thành trong thời gian ngắn.",
+          "Ví dụ: Vừa soạn bài, chấm bài vừa phải kịp nhiều hạn chót (deadlines).",
+          "Cách giải tỏa: Nghỉ giải lao ngắn hoặc nghe nhạc để thư giãn."
+        ],
+        sample_b1: [
+          "I usually feel stressed when I have too much work to complete in a short time.",
+          "For example, I sometimes have to prepare lessons, mark assignments and meet several deadlines at the same time.",
+          "This makes me feel tired and worried.",
+          "When that happens, I normally take a short break or listen to music.",
+          "These activities help me relax and feel better.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I tend to feel stressed whenever I have to deal with several responsibilities at the same time, especially when important deadlines are approaching.",
+          "As well as preparing lessons and assessing my students’ work, I also need to manage my studies and family commitments.",
+          "Although the pressure can sometimes feel overwhelming, I try to organise my tasks according to their importance and take short breaks.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "in a short time", vi: "trong thời gian ngắn" },
+          { en: "mark assignments", vi: "chấm bài tập" },
+          { en: "meet several deadlines", vi: "kịp nhiều hạn chót" },
+          { en: "take a short break", vi: "nghỉ giải lao ngắn" }
+        ]
+      },
+      {
+        id: 10,
+        topic: "Favourite Place",
+        question: "Describe one of your favourite places.",
+        outline: [
+          "Địa điểm: Bãi biển yên bình gần quê, cát mềm và nước trong xanh.",
+          "Hoạt động: Thường đi cùng gia đình vào kỳ nghỉ hè, bơi, ăn hải sản và chụp ảnh.",
+          "Cảm nhận: Yêu nơi này vì giúp thư giãn và quên đi lo âu hàng ngày."
+        ],
+        sample_b1: [
+          "One of my favourite places is a beach near my hometown.",
+          "It is a beautiful and peaceful place with soft sand and clear blue water.",
+          "For example, I often go there with my family during the summer holiday.",
+          "We usually swim, eat seafood and take photos together.",
+          "I love this beach because it helps me relax and forget about my daily worries.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "One of my favourite places is a peaceful beach located near my hometown.",
+          "What I appreciate most about it is the fresh air and the beautiful view of the sea, which immediately make me feel relaxed.",
+          "Whenever I visit it, I enjoy walking along the shore, tasting fresh seafood and watching the sunset with my family.",
+          "Although it can become crowded during the summer, it remains an ideal place to unwind.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "soft sand and clear blue water", vi: "cát mềm và nước trong xanh" },
+          { en: "during the summer holiday", vi: "trong kỳ nghỉ hè" },
+          { en: "eat seafood", vi: "ăn hải sản" },
+          { en: "forget about my daily worries", vi: "quên đi những lo lắng hàng ngày" }
+        ]
+      },
+      {
+        id: 11,
+        topic: "Talking with Mother",
+        question: "Tell me about the last time you talked with your mother.",
+        outline: [
+          "Thời gian & Bối cảnh: Tối hôm qua, ngồi cùng nhau ở phòng khách.",
+          "Nội dung: Trò chuyện về gia đình, công việc, việc học và con cái; lắng nghe và khuyên nhủ.",
+          "Cảm nhận: Thấy vui vì có thời gian tâm sự và hiểu nhau hơn."
+        ],
+        sample_b1: [
+          "The last time I talked with my mother was yesterday evening.",
+          "We sat together in the living room and talked about our family and daily activities.",
+          "For example, she asked me about my work, my studies and my children.",
+          "I also listened to her stories and gave her some advice.",
+          "I felt happy because we had time to talk and understand each other better.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "The last time I talked with my mother was yesterday evening, when we had a quiet conversation in the living room.",
+          "We discussed several things, including my work, my studies and how the children were doing at school.",
+          "What I appreciated most was that she listened carefully and offered me some useful advice.",
+          "Although we do not always agree with each other, talking openly helps us maintain a close relationship.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "yesterday evening", vi: "tối hôm qua" },
+          { en: "daily activities", vi: "các hoạt động hàng ngày" },
+          { en: "gave her some advice", vi: "đưa cho bà vài lời khuyên" },
+          { en: "understand each other better", vi: "hiểu nhau hơn" }
+        ]
+      },
+      {
+        id: 12,
+        topic: "Popular Sports",
+        question: "What sports are popular in your country?",
+        outline: [
+          "Môn phổ biến nhất: Bóng đá (mọi lứa tuổi đều thích chơi hoặc xem trên TV).",
+          "Ví dụ & Môn khác: Người trẻ đá bóng ở trường/công viên; cầu lông và bóng chuyền cũng phổ biến.",
+          "Lý do: Vui vẻ và giúp mọi người giữ gìn sức khỏe."
+        ],
+        sample_b1: [
+          "Many sports are popular in Vietnam, but football is probably the most popular one.",
+          "People of all ages enjoy playing it or watching important matches on television.",
+          "For example, young people often play football with their friends at school or in local parks.",
+          "Badminton and volleyball are also common because they are easy to play.",
+          "I think sports are popular because they are enjoyable and help people stay healthy.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "A wide variety of sports are played in Vietnam, although football is undoubtedly the most popular.",
+          "Whenever the national team takes part in an important match, millions of people watch it and celebrate together.",
+          "Besides football, badminton and volleyball are widely enjoyed because they require little equipment and can be played in many places.",
+          "In recent years, running and gym-based activities have also become increasingly popular.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "people of all ages", vi: "mọi người ở mọi lứa tuổi" },
+          { en: "watching important matches", vi: "xem các trận đấu quan trọng" },
+          { en: "in local parks", vi: "ở các công viên địa phương" },
+          { en: "help people stay healthy", vi: "giúp mọi người giữ sức khỏe" }
+        ]
+      },
+      {
+        id: 13,
+        topic: "Vietnamese Meal",
+        question: "Describe a typical Vietnamese meal.",
+        outline: [
+          "Thành phần: Gồm cơm, thịt hoặc cá, rau và canh đặt giữa bàn để ăn chung.",
+          "Ví dụ: Gia đình thường ăn cơm với cá rán, rau luộc và canh rau.",
+          "Cảm nhận: Ngon, lành mạnh, dễ nấu và giúp gia đình quây quần."
+        ],
+        sample_b1: [
+          "A typical Vietnamese meal usually includes rice, meat or fish, vegetables and soup.",
+          "All the dishes are placed in the middle of the table, so everyone can share them.",
+          "For example, my family often eats rice with fried fish, boiled vegetables and vegetable soup.",
+          "I like this kind of meal because it is tasty, healthy and easy to prepare.",
+          "It also gives family members a chance to spend time together.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "A typical Vietnamese meal consists of steamed rice accompanied by several dishes, such as meat or fish, stir-fried vegetables and soup.",
+          "Rather than having individual portions, family members normally share the food placed in the centre of the table.",
+          "What makes this meal special is not only its well-balanced flavours but also the opportunity it provides for family members to gather and talk.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "in the middle of the table", vi: "ở giữa bàn" },
+          { en: "fried fish, boiled vegetables", vi: "cá rán, rau luộc" },
+          { en: "tasty, healthy and easy to prepare", vi: "ngon, bổ dưỡng và dễ chuẩn bị" },
+          { en: "a chance to spend time together", vi: "cơ hội dành thời gian bên nhau" }
+        ]
+      },
+      {
+        id: 14,
+        topic: "Typical Day",
+        question: "Describe a typical day in your life. / What are you doing for the rest of today?",
+        outline: [
+          "Buổi sáng: Dậy lúc 6h, nấu bữa sáng, đưa con đi học rồi tới trường đại học dạy.",
+          "Buổi chiều: Soạn bài hoặc chấm bài tập của sinh viên.",
+          "Buổi tối: Ăn tối cùng gia đình, giúp con học bài, đọc sách/xem video trước khi ngủ."
+        ],
+        sample_b1: [
+          "On a typical day, I get up at about six o’clock and prepare breakfast for my family.",
+          "After taking my children to school, I go to work and teach English classes at a university.",
+          "In the afternoon, I usually prepare lessons or mark my students’ assignments.",
+          "When I get home, I have dinner with my family and help my children with their homework.",
+          "I often read or watch videos before going to bed.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "A typical day in my life tends to be quite busy because I have to balance my work, studies and family responsibilities.",
+          "I usually start my day by preparing breakfast and taking my children to school before heading to the university to teach.",
+          "Once my classes have finished, I spend time planning lessons, assessing assignments or working on my research.",
+          "Although my schedule can be demanding, I try to relax with my family in the evening.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "prepare breakfast", vi: "chuẩn bị bữa sáng" },
+          { en: "taking my children to school", vi: "đưa con đi học" },
+          { en: "help my children with their homework", vi: "giúp con làm bài tập về nhà" },
+          { en: "before going to bed", vi: "trước khi đi ngủ" }
+        ]
+      },
+      {
+        id: 15,
+        topic: "Free Time & Hobby",
+        question: "What do you like to do in your free time? What is your hobby?",
+        outline: [
+          "Hoạt động chính: Xem phim, nghe nhạc và dành thời gian cho gia đình.",
+          "Ví dụ: Xem phim hài ở nhà sau giờ làm; cuối tuần đưa con đi ăn hoặc mua sắm.",
+          "Cảm nhận: Giúp thư giãn, quên đi âu lo và luôn thấy hạnh phúc."
+        ],
+        sample_b1: [
+          "In my free time, I like watching movies, listening to music and spending time with my family.",
+          "For example, I often watch comedy films at home after finishing my work.",
+          "At weekends, I sometimes take my children out for a meal or go shopping with them.",
+          "These activities help me relax and forget about my daily worries.",
+          "I always feel happy when I have enough time to do the things I enjoy.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Whenever I have some free time, I enjoy watching films, listening to music and doing activities with my family.",
+          "One of the main reasons I prefer these activities is that they allow me to unwind after a demanding week.",
+          "For instance, I occasionally watch a comedy or take my children out for a meal at weekends.",
+          "Although I rarely have much time to myself, I try to maintain a healthy balance between my responsibilities and personal interests.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "watch comedy films", vi: "xem phim hài" },
+          { en: "take my children out for a meal", vi: "đưa các con đi ăn ngoài" },
+          { en: "forget about my daily worries", vi: "quên đi nỗi lo thường nhật" },
+          { en: "do the things I enjoy", vi: "làm những điều mình thích" }
+        ]
+      },
+      {
+        id: 16,
+        topic: "Favourite Animal",
+        question: "What is your favourite animal, and why?",
+        outline: [
+          "Con vật yêu thích: Chó vì thân thiện, thông minh và trung thành.",
+          "Ví dụ lợi ích: Chơi với trẻ nhỏ, giữ nhà và giúp chủ bớt cô đơn.",
+          "Mong muốn: Hiện chưa nuôi nhưng muốn nuôi trong tương lai."
+        ],
+        sample_b1: [
+          "My favourite animal is the dog because it is friendly, intelligent and loyal.",
+          "Dogs can live with people and become important members of a family.",
+          "For example, they can play with children, protect the house and make their owners feel less lonely.",
+          "Although I do not have a dog at the moment, I would like to keep one in the future.",
+          "I always feel happy whenever I see a friendly dog.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "My favourite animal is the dog, mainly because of its intelligence, loyalty and affectionate nature.",
+          "Dogs are not only wonderful companions, but they can also protect their owners and provide emotional support.",
+          "What I admire most is their ability to form incredibly strong relationships with humans.",
+          "Although looking after a dog requires considerable time and responsibility, I would love to have one in the future.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "friendly, intelligent and loyal", vi: "thân thiện, thông minh và trung thành" },
+          { en: "important members of a family", vi: "thành viên quan trọng trong gia đình" },
+          { en: "protect the house", vi: "bảo vệ ngôi nhà" },
+          { en: "feel less lonely", vi: "cảm thấy bớt cô đơn" }
+        ]
+      },
+      {
+        id: 17,
+        topic: "About Yourself",
+        question: "Tell me a little about yourself.",
+        outline: [
+          "Giới thiệu: Tên Helen, giảng viên tiếng Anh đại học, sống cùng chồng con ở Việt Nam.",
+          "Tính cách: Thân thiện, chăm chỉ dù đôi lúc khá bận rộn.",
+          "Sở thích: Nghe nhạc, xem phim, ở bên gia đình và học hỏi điều mới."
+        ],
+        sample_b1: [
+          "My name is Helen, and I am an English lecturer at a university.",
+          "I live with my husband and children in Vietnam.",
+          "I am a friendly and hardworking person, although I can be quite busy sometimes.",
+          "In my free time, I enjoy listening to music, watching movies and spending time with my family.",
+          "I also like learning new things because I always want to improve myself.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "My name is Helen, and I currently work as an English lecturer at a university while continuing my postgraduate studies.",
+          "I would describe myself as responsible, determined and eager to learn.",
+          "Although balancing my career, studies and family life can be challenging, I always try to manage my time effectively.",
+          "Whenever I have some free time, I enjoy watching films or relaxing with my family.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "an English lecturer at a university", vi: "giảng viên tiếng Anh tại trường đại học" },
+          { en: "a friendly and hardworking person", vi: "người thân thiện và chăm chỉ" },
+          { en: "learning new things", vi: "học hỏi những điều mới" },
+          { en: "improve myself", vi: "hoàn thiện bản thân" }
+        ]
+      },
+      {
+        id: 18,
+        topic: "Hometown",
+        question: "Tell me about your hometown.",
+        outline: [
+          "Mô tả chung: Thị trấn nhỏ yên bình ở Việt Nam, người dân thân thiện, có chợ và quán cà phê nhỏ.",
+          "Chi tiết: Không quá đông đúc, không khí trong lành; hay đi chợ ăn món truyền thống khi về quê.",
+          "Cảm nhận: Yêu quê hương vì có nhiều kỷ niệm tuổi thơ đẹp."
+        ],
+        sample_b1: [
+          "My hometown is a small town in Vietnam.",
+          "It is a peaceful place with friendly people, local markets and many small cafés.",
+          "The town is not very crowded, so the air is quite fresh and life is relaxing.",
+          "For example, I often visit the local market and enjoy traditional food whenever I return home.",
+          "I love my hometown because I have many happy childhood memories there.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "My hometown is a peaceful town in Vietnam, which is known for its friendly residents and relaxed way of life.",
+          "What I appreciate most about it is that it is less crowded and stressful than a major city.",
+          "Although it does not offer as many entertainment facilities or career opportunities, it has beautiful scenery and a strong sense of community.",
+          "Whenever I return, I feel connected to my childhood and can temporarily escape from my hectic routine.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a peaceful place with friendly people", vi: "nơi yên bình với những con người thân thiện" },
+          { en: "the air is quite fresh", vi: "không khí khá trong lành" },
+          { en: "enjoy traditional food", vi: "thưởng thức món ăn truyền thống" },
+          { en: "happy childhood memories", vi: "những kỷ niệm tuổi thơ hạnh phúc" }
+        ]
+      },
+      {
+        id: 19,
+        topic: "Travel Around Country",
+        question: "What is the best way to travel around your country?",
+        outline: [
+          "Phương tiện: Đi tàu hỏa (train) là cách tốt nhất vì thoải mái, an toàn, rẻ hơn máy bay.",
+          "Chi tiết: Đi qua các thành phố lớn và ngắm cảnh đồng quê, bờ biển đẹp.",
+          "Cảm nhận: Dù hơi lâu nhưng thư giãn và ngắm được nhiều cảnh đất nước."
+        ],
+        sample_b1: [
+          "I think traveling by train is one of the best ways to travel around Vietnam.",
+          "It is comfortable, safe and usually cheaper than flying.",
+          "For example, passengers can travel between major cities while enjoying beautiful views of the countryside and the coast.",
+          "Train journeys can take a long time, but they are relaxing and interesting.",
+          "I prefer this form of transport because I can see more of the country.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "In my opinion, travelling by train is one of the most enjoyable ways to explore Vietnam, especially for visitors who are not in a hurry.",
+          "Since the railway connects several major cities, passengers can admire the country’s spectacular coastline and countryside throughout the journey.",
+          "Although flying is considerably faster, travelling by train is generally more affordable and offers a more memorable experience.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "traveling by train", vi: "đi du lịch bằng tàu hỏa" },
+          { en: "cheaper than flying", vi: "rẻ hơn đi máy bay" },
+          { en: "beautiful views of the countryside", vi: "cảnh đẹp vùng nông thôn" },
+          { en: "see more of the country", vi: "ngắm nhìn được nhiều nơi của đất nước hơn" }
+        ]
+      },
+      {
+        id: 20,
+        topic: "Close Friend / Family Member",
+        question: "Tell me about a close friend or family member.",
+        outline: [
+          "Nhân vật: Chị gái (older sister) - người thân thiết nhất, thân thiện, kiên nhẫn và chăm chỉ.",
+          "Chi tiết: Luôn lắng nghe, cho lời khuyên hữu ích và động viên khi tôi áp lực.",
+          "Cảm nhận: Thích ở bên chị vì chị rất hiểu và ủng hộ tôi."
+        ],
+        sample_b1: [
+          "I would like to talk about my older sister, who is one of the closest people in my life.",
+          "She is friendly, patient and hardworking.",
+          "Whenever I have a problem, she listens to me and gives me helpful advice.",
+          "For example, she always encourages me when I feel stressed about my work or studies.",
+          "I enjoy spending time with her because she understands me very well and makes me feel supported.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "One of the people I feel closest to is my older sister, whom I have always admired for her patience and positive attitude.",
+          "Whenever I am under pressure, she is willing to listen without judging me and usually offers practical advice.",
+          "Although we sometimes have different opinions, we respect each other and resolve our disagreements quickly.",
+          "What I value most about our relationship is that I can rely on her regardless of the situation.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "one of the closest people", vi: "một trong những người thân thiết nhất" },
+          { en: "friendly, patient and hardworking", vi: "thân thiện, kiên nhẫn và chăm chỉ" },
+          { en: "gives me helpful advice", vi: "cho tôi lời khuyên hữu ích" },
+          { en: "makes me feel supported", vi: "làm tôi cảm thấy được sẻ chia/ủng hộ" }
+        ]
+      },
+      {
+        id: 21,
+        topic: "Favourite Season",
+        question: "What is your favourite season, and why?",
+        outline: [
+          "Mùa yêu thích: Mùa thu vì thời tiết mát mẻ, dễ chịu (không quá nóng hay quá lạnh).",
+          "Hoạt động: Đi dạo ngoài trời, gặp bạn bè và chụp ảnh.",
+          "Cảm nhận: Thích không khí trong lành, yên bình, luôn thấy thư thái."
+        ],
+        sample_b1: [
+          "My favourite season is autumn because the weather is cool and pleasant.",
+          "It is neither too hot nor too cold, so I can spend more time outdoors.",
+          "For example, I enjoy going for walks, meeting my friends and taking photos when the weather is nice.",
+          "I also like the fresh air and peaceful atmosphere of this season.",
+          "Autumn always makes me feel relaxed and comfortable.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Autumn is by far my favourite season, mainly because of its mild weather and peaceful atmosphere.",
+          "Unlike summer, which can be extremely hot and humid, autumn is cool enough for people to enjoy outdoor activities comfortably.",
+          "Whenever I have free time, I like going for a walk and appreciating the pleasant weather.",
+          "Although autumn does not last very long in some parts of Vietnam, its refreshing air always improves my mood.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "cool and pleasant", vi: "mát mẻ và dễ chịu" },
+          { en: "neither too hot nor too cold", vi: "không quá nóng cũng không quá lạnh" },
+          { en: "spend more time outdoors", vi: "dành nhiều thời gian ở ngoài trời hơn" },
+          { en: "peaceful atmosphere", vi: "bầu không khí yên bình" }
+        ]
+      },
+      {
+        id: 22,
+        topic: "Good Memories",
+        question: "Tell me about one of your good memories.",
+        outline: [
+          "Kỷ niệm: Chuyến du lịch biển mùa hè năm ngoái cùng gia đình và bạn thân.",
+          "Hoạt động: Tắm biển, ăn hải sản tươi, chụp nhiều ảnh và trò chuyện đến khuya.",
+          "Cảm nhận: Cực kỳ hạnh phúc vì được thư giãn bên những người thân yêu."
+        ],
+        sample_b1: [
+          "One of my best memories is a summer trip that I took with my family and close friends last year.",
+          "We visited a beautiful beach, swam in the sea and enjoyed fresh seafood together.",
+          "We also took many photos and talked until late at night.",
+          "I felt extremely happy because I could relax and spend quality time with the people I love.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "One of my most memorable experiences was a beach trip that I took with my family and close friends last summer.",
+          "We stayed at a lovely hotel near the coast, where we could swim, sample local specialities and admire the sunset together.",
+          "What made the trip particularly meaningful was the opportunity to escape from our busy routines and spend quality time with one another.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a summer trip", vi: "một chuyến đi mùa hè" },
+          { en: "enjoyed fresh seafood", vi: "thưởng thức hải sản tươi ngon" },
+          { en: "talked until late at night", vi: "trò chuyện đến tận đêm khuya" },
+          { en: "spend quality time with", vi: "dành thời gian chất lượng bên..." }
+        ]
+      },
+      {
+        id: 23,
+        topic: "Friends Activities",
+        question: "What do you like doing with your friends? / Please tell me about the last time you visited friends.",
+        outline: [
+          "Hoạt động chung: Thích đi du lịch cùng bạn thân, nhất là vào kỳ nghỉ hè.",
+          "Chi tiết: Đi biển đẹp, tắm biển, ăn hải sản, chụp ảnh và tâm sự đến khuya.",
+          "Cảm nhận: Giúp thư giãn và tạo nhiều kỷ niệm vui vẻ."
+        ],
+        sample_b1: [
+          "I like travelling with my close friends, especially during the summer holiday.",
+          "We usually visit a beautiful beach, swim in the sea and enjoy fresh seafood together.",
+          "We also take many photos and talk until late at night.",
+          "I enjoy these trips because they help me relax and spend quality time with my friends.",
+          "We always have fun and create many happy memories together.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "One of my favourite activities is travelling with my close friends, particularly during the summer holiday.",
+          "We often choose a coastal destination where we can swim, sample local specialities and admire the sunset together.",
+          "What I enjoy most about these trips is the opportunity to escape from our busy routines and spend quality time with one another.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "travelling with my close friends", vi: "đi du lịch cùng những người bạn thân" },
+          { en: "swim in the sea", vi: "bơi ở biển" },
+          { en: "spend quality time", vi: "dành thời gian quý báu/chất lượng" },
+          { en: "create many happy memories", vi: "tạo nên nhiều kỷ niệm vui" }
+        ]
+      },
+      {
+        id: 24,
+        topic: "Future Plans",
+        question: "Describe something you are planning to do in the future.",
+        outline: [
+          "Kế hoạch: Dự định đi du lịch biển cùng gia đình và bạn thân vào mùa hè tới.",
+          "Hoạt động: Bơi lội, ăn hải sản tươi và chụp nhiều ảnh đẹp.",
+          "Cảm nhận: Rất háo hức vì sẽ giúp thư giãn sau đợt làm việc bận rộn."
+        ],
+        sample_b1: [
+          "I am planning to take a trip to the beach with my family and close friends next summer.",
+          "We would like to swim in the sea, enjoy fresh seafood and take many beautiful photos together.",
+          "I am excited about this trip because it will help me relax after a busy period at work.",
+          "It will also give me an opportunity to spend quality time with the people I love and create happy memories.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "One thing I am planning to do in the future is take a beach holiday with my family and close friends next summer.",
+          "We intend to choose a peaceful coastal destination where we can swim, sample local specialities and admire the sunset together.",
+          "Although organising a group trip can be challenging, I believe it will be worthwhile because it will allow us to escape from our demanding routines.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "planning to take a trip", vi: "đang lên kế hoạch cho một chuyến đi" },
+          { en: "excited about this trip", vi: "hào hứng về chuyến đi này" },
+          { en: "give me an opportunity", vi: "cho tôi một cơ hội" },
+          { en: "the people I love", vi: "những người tôi yêu thương" }
+        ]
+      },
+      {
+        id: 25,
+        topic: "Recent Journey",
+        question: "Describe a journey you made recently.",
+        outline: [
+          "Chuyến đi: Gần đây đi biển với gia đình và bạn thân bằng ô tô mất khoảng 3 tiếng.",
+          "Hoạt động: Khi đến nơi thì tắm biển, ăn hải sản tươi và chụp nhiều ảnh.",
+          "Cảm nhận: Rất thích chuyến đi vì giúp thư giãn và có nhiều kỷ niệm đẹp."
+        ],
+        sample_b1: [
+          "Recently, I took a trip to the beach with my family and close friends.",
+          "We travelled there by car, and the journey took about three hours.",
+          "When we arrived, we swam in the sea, ate fresh seafood and took many beautiful photos.",
+          "I really enjoyed the trip because it helped me relax and spend quality time with the people I love.",
+          "It gave me many happy memories.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "One of the most enjoyable journeys I have made recently was a trip to the beach with my family and close friends.",
+          "We travelled by car and spent most of the journey chatting and admiring the scenery.",
+          "After arriving, we swam, sampled fresh seafood and watched the sunset together.",
+          "Although the journey took several hours, it was worthwhile because it allowed me to escape from my demanding routine.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "travelled there by car", vi: "di chuyển đến đó bằng ô tô" },
+          { en: "took about three hours", vi: "mất khoảng 3 tiếng đồng hồ" },
+          { en: "ate fresh seafood", vi: "ăn hải sản tươi" },
+          { en: "gave me many happy memories", vi: "mang lại cho tôi nhiều kỷ niệm đẹp" }
+        ]
+      },
+      {
+        id: 26,
+        topic: "Wearing Today",
+        question: "What are you wearing today?",
+        outline: [
+          "Trang phục: Áo sơ mi trắng (white blouse), quần âu đen và giày êm chân.",
+          "Lý do & Phụ kiện: Mặc đi làm để lịch sự, chuyên nghiệp; chỉ đeo thêm 1 chiếc đồng hồ.",
+          "Cảm nhận: Thấy tự tin và thoải mái trong bộ đồ này."
+        ],
+        sample_b1: [
+          "Today, I am wearing a white blouse, a pair of black trousers and comfortable shoes.",
+          "I chose these clothes because I have to go to work, so I want to look polite and professional.",
+          "My blouse is simple, but it is soft and comfortable.",
+          "I do not usually wear many accessories, so I am only wearing a watch.",
+          "I feel confident and relaxed in this outfit.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Today, I’m wearing a plain white blouse with black trousers and a pair of comfortable shoes.",
+          "Since I have to teach at the university, I chose an outfit that looks professional while still allowing me to move around easily.",
+          "I have also added a simple watch, which is the only accessory I normally wear.",
+          "Although I enjoy fashionable clothes, comfort and practicality are more important to me.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a white blouse", vi: "một chiếc áo sơ mi nữ màu trắng" },
+          { en: "a pair of black trousers", vi: "một chiếc quần dài màu đen" },
+          { en: "look polite and professional", vi: "trông lịch sự và chuyên nghiệp" },
+          { en: "confident and relaxed in this outfit", vi: "tự tin và thoải mái trong bộ đồ này" }
+        ]
+      },
+      {
+        id: 27,
+        topic: "Feeling Tired",
+        question: "When do you feel tired?",
+        outline: [
+          "Thời điểm: Khi có quá nhiều việc phải làm xong trong thời gian ngắn.",
+          "Ví dụ: Dạy học, soạn bài, chấm bài và chăm sóc gia đình trong cùng một ngày.",
+          "Cách khắc phục: Nghỉ ngắn, nghe nhạc hoặc đi ngủ sớm để hồi phục."
+        ],
+        sample_b1: [
+          "I usually feel tired when I have too much work to complete in a short time.",
+          "For example, I sometimes have to teach classes, prepare lessons, mark assignments and take care of my family on the same day.",
+          "After finishing all these tasks, I often have very little energy left.",
+          "When this happens, I normally take a short break, listen to music or go to bed early.",
+          "These activities help me feel better.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I tend to feel exhausted whenever I have to manage several responsibilities at the same time, particularly during a busy working week.",
+          "Besides teaching classes and assessing my students’ work, I also need to concentrate on my studies and take care of my family.",
+          "By the end of the day, I sometimes have very little energy left.",
+          "Although it is difficult to avoid such demanding periods, I try to prioritise my tasks and get enough sleep.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "take care of my family", vi: "chăm sóc gia đình" },
+          { en: "on the same day", vi: "trong cùng một ngày" },
+          { en: "very little energy left", vi: "còn lại rất ít năng lượng" },
+          { en: "go to bed early", vi: "đi ngủ sớm" }
+        ]
+      },
+      {
+        id: 28,
+        topic: "Room Spend Most Time",
+        question: "Describe the room you spend the most time in.",
+        outline: [
+          "Căn phòng: Phòng ngủ - không quá lớn nhưng yên tĩnh, thoải mái và ngập ánh sáng tự nhiên.",
+          "Nội thất & Hoạt động: Có giường êm, tủ đồ và bàn nhỏ để học, soạn bài; tối nghe nhạc/xem video.",
+          "Cảm nhận: Thích phòng này vì giúp thư giãn và tập trung làm việc."
+        ],
+        sample_b1: [
+          "The room I spend the most time in is my bedroom.",
+          "It is not very large, but it is quiet, comfortable and filled with natural light.",
+          "There is a soft bed, a wardrobe and a small desk where I usually study and prepare my lessons.",
+          "In the evening, I often listen to music or watch short videos there.",
+          "I like this room because it helps me relax and concentrate on my work.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I spend most of my time in my bedroom, which also serves as my personal study area.",
+          "Although it is not particularly spacious, it is well organised and receives plenty of natural light through a large window.",
+          "There is a desk where I can work on my research and prepare my lessons without being disturbed.",
+          "What I appreciate most about the room is its peaceful atmosphere.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "filled with natural light", vi: "tràn ngập ánh sáng tự nhiên" },
+          { en: "a soft bed, a wardrobe and a small desk", vi: "giường êm, tủ quần áo và bàn nhỏ" },
+          { en: "watch short videos", vi: "xem các video ngắn" },
+          { en: "concentrate on my work", vi: "tập trung vào công việc" }
+        ]
+      },
+      {
+        id: 29,
+        topic: "New House / Apartment",
+        question: "What would you look for in a new house or apartment?",
+        outline: [
+          "Vị trí & Không gian: Khu dân cư yên tĩnh, an toàn, đủ phòng ngủ và nhiều ánh sáng tự nhiên.",
+          "Tiện ích: Có phòng làm việc riêng thoải mái và khu vườn nhỏ cho con chơi.",
+          "Quan trọng nhất: Gần trường học, cửa hàng và nơi làm việc."
+        ],
+        sample_b1: [
+          "If I looked for a new house, I would choose one in a quiet and safe neighbourhood.",
+          "It should have enough bedrooms for my family and plenty of natural light.",
+          "I would also like a comfortable room where I could study and prepare my lessons.",
+          "A small garden would be useful because my children could play there.",
+          "Most importantly, the house should be near schools, shops and my workplace.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "If I were looking for a new house, I would prioritise a quiet location, sufficient space and plenty of natural light.",
+          "Since I have both work and study responsibilities, I would need a separate room where I could concentrate without being disturbed.",
+          "I would also prefer a small garden in which my family could relax together.",
+          "Although appearance is important, a safe neighbourhood and convenient access to schools would have a greater influence on my decision.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a quiet and safe neighbourhood", vi: "khu dân cư yên tĩnh và an toàn" },
+          { en: "plenty of natural light", vi: "nhiều ánh sáng tự nhiên" },
+          { en: "a small garden", vi: "một khu vườn nhỏ" },
+          { en: "near schools, shops and my workplace", vi: "gần trường học, cửa hàng và nơi làm việc" }
+        ]
+      },
+      {
+        id: 30,
+        topic: "Learning English",
+        question: "Why are you learning English?",
+        outline: [
+          "Lý do chính: Quan trọng cho cả công việc giảng dạy và việc học tập.",
+          "Chi tiết: Giúp giao tiếp rõ ràng, dạy sinh viên tốt hơn và đọc sách/tài liệu quốc tế.",
+          "Tương lai: Mở rộng cơ hội nghề nghiệp và trở nên tự tin hơn."
+        ],
+        sample_b1: [
+          "I am learning English because it is important for both my work and studies.",
+          "As an English lecturer, I need to communicate clearly and help my students improve their language skills.",
+          "English also allows me to read useful books and research articles from different countries.",
+          "In the future, I hope it will give me more career opportunities.",
+          "Although learning English can be difficult, I enjoy improving my knowledge and becoming more confident.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I’m learning English because it plays an essential role in both my academic studies and professional development.",
+          "As a university lecturer, I need a strong command of the language to teach effectively and communicate my ideas with confidence.",
+          "English also enables me to access international research that may not be available in Vietnamese.",
+          "Although achieving a high level of proficiency requires considerable effort, it could broaden my career opportunities.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "important for both my work and studies", vi: "quan trọng cho cả công việc và học tập" },
+          { en: "communicate clearly", vi: "giao tiếp rõ ràng" },
+          { en: "research articles", vi: "các bài báo nghiên cứu" },
+          { en: "more career opportunities", vi: "nhiều cơ hội nghề nghiệp hơn" }
+        ]
+      },
+      {
+        id: 31,
+        topic: "Advertisement",
+        question: "Please tell me about the last time you saw an advertisement.",
+        outline: [
+          "Thời gian & Kênh: Tối qua khi đang xem video trên YouTube.",
+          "Nội dung: Quảng cáo điện thoại thông minh mới có camera chất lượng cao và pin bền.",
+          "Cảm nhận: Thường bỏ qua quảng cáo nhưng lần này xem hết vì điện thoại hiện đại, hữu ích."
+        ],
+        sample_b1: [
+          "The last time I saw an advertisement was yesterday evening while I was watching videos on YouTube.",
+          "It was an advertisement for a new smartphone with a high-quality camera and a long-lasting battery.",
+          "I found it interesting because the phone looked modern and useful.",
+          "Although I normally skip online advertisements, I watched this one until the end because I wanted to learn more about the product.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "The last advertisement I saw appeared yesterday evening while I was watching videos on YouTube.",
+          "It promoted a newly released smartphone which had an advanced camera, a long-lasting battery and several useful features.",
+          "What caught my attention most was the creative way in which the product was presented.",
+          "Although I tend to skip online advertisements, this one was so visually appealing that I watched it until the end.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a high-quality camera", vi: "máy ảnh chất lượng cao" },
+          { en: "a long-lasting battery", vi: "pin dùng được lâu" },
+          { en: "skip online advertisements", vi: "bỏ qua quảng cáo trực tuyến" },
+          { en: "watched this one until the end", vi: "xem quảng cáo này đến tận cuối" }
+        ]
+      },
+      {
+        id: 32,
+        topic: "Television & Film",
+        question: "What kind of television content do you usually watch? / Please tell me about your favourite film.",
+        outline: [
+          "Thể loại: Thường xem chương trình hài và phim ảnh vào thời gian rảnh vì giải trí, dễ hiểu.",
+          "Ví dụ: Xem hài cùng gia đình sau bữa tối, cùng cười và bàn luận.",
+          "Lợi ích: Giúp quên đi công việc và thấy khỏe khoắn hơn sau ngày bận rộn."
+        ],
+        sample_b1: [
+          "I usually watch comedy programmes and movies on television in my free time.",
+          "I enjoy this kind of content because it is entertaining and easy to follow.",
+          "For example, I often watch a comedy with my family after we have finished dinner.",
+          "We can laugh, talk about the story and relax together.",
+          "Watching entertaining programmes helps me forget about my work and feel better after a busy day.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I tend to watch comedy programmes and light-hearted films whenever I have some free time.",
+          "One of the main reasons I prefer this type of content is that it helps me unwind after a demanding day.",
+          "I occasionally watch television with my family, which gives us an opportunity to relax and laugh together.",
+          "Although documentaries can be informative, I normally choose entertaining programmes when I am tired.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "comedy programmes", vi: "các chương trình hài" },
+          { en: "entertaining and easy to follow", vi: "mang tính giải trí và dễ theo dõi" },
+          { en: "after we have finished dinner", vi: "sau khi chúng tôi ăn tối xong" },
+          { en: "feel better after a busy day", vi: "cảm thấy tốt hơn sau một ngày bận rộn" }
+        ]
+      },
+      {
+        id: 33,
+        topic: "Reading Books",
+        question: "What kinds of books do you enjoy reading?",
+        outline: [
+          "Thể loại: Thích đọc tiểu thuyết về tuổi thơ, gia đình và các mối quan hệ.",
+          "Ví dụ: Tôi thấy hoa vàng trên cỏ xanh (hai anh em ở vùng quê Việt Nam).",
+          "Lý do: Câu chuyện giản dị, cảm động, giúp thư giãn và dạy bài học quý giá."
+        ],
+        sample_b1: [
+          "I enjoy reading novels about childhood, family life and relationships.",
+          "One of my favourite books is Yellow Flowers on the Green Grass, which tells the story of two brothers living in the Vietnamese countryside.",
+          "I like this kind of book because the stories are simple, touching and easy to understand.",
+          "Reading novels helps me relax, and it also teaches me valuable lessons about family and life.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I’m particularly interested in novels that explore childhood experiences, family relationships and personal development.",
+          "One book that I especially enjoyed was Yellow Flowers on the Green Grass, which portrays the lives of two brothers growing up in rural Vietnam.",
+          "What appeals to me most is the author’s ability to discuss complex emotions through a simple and moving story.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "reading novels", vi: "đọc tiểu thuyết" },
+          { en: "tells the story of", vi: "kể về câu chuyện của..." },
+          { en: "simple, touching and easy to understand", vi: "đơn giản, xúc động và dễ hiểu" },
+          { en: "teaches me valuable lessons", vi: "dạy cho tôi những bài học quý giá" }
+        ]
+      },
+      {
+        id: 34,
+        topic: "Neighbourhood",
+        question: "Can you tell me something about your neighbourhood?",
+        outline: [
+          "Đặc điểm: Khu phố yên tĩnh và an toàn gần trung tâm thị trấn, hàng xóm thân thiện.",
+          "Tiện ích xung quanh: Có chợ địa phương, quán cà phê và trường học gần nhà.",
+          "Cảm nhận: Thích sống ở đây vì tiện lợi, không quá đông đúc, thoải mái cho gia đình."
+        ],
+        sample_b1: [
+          "I live in a quiet and safe neighbourhood near the centre of my town.",
+          "The people who live there are friendly, and they are always willing to help one another.",
+          "There are also several useful places nearby, such as a local market, some cafés and a school.",
+          "I like living there because it is convenient and not too crowded.",
+          "It is a comfortable place for my family.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I currently live in a peaceful and relatively safe neighbourhood located near the centre of my town.",
+          "It has several convenient facilities, including a local market, cafés and schools, all of which are within walking distance of my home.",
+          "What makes the area particularly pleasant is its strong sense of community, as the residents are friendly.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "willing to help one another", vi: "sẵn lòng giúp đỡ lẫn nhau" },
+          { en: "useful places nearby", vi: "những địa điểm hữu ích gần đó" },
+          { en: "convenient and not too crowded", vi: "thuận tiện và không quá đông đúc" },
+          { en: "a comfortable place for my family", vi: "một nơi thoải mái cho gia đình tôi" }
+        ]
+      },
+      {
+        id: 35,
+        topic: "Like Most About Neighbourhood",
+        question: "What do you like most about your neighbourhood?",
+        outline: [
+          "Điểm thích nhất: Yên tĩnh, an toàn và thuận tiện; hàng xóm thân thiện, hay giúp đỡ.",
+          "Tiện ích: Gần chợ, quán cà phê, trường học nên dễ mua sắm không cần đi xa.",
+          "Kết luận: Không quá đông đúc, rất thoải mái cho gia đình."
+        ],
+        sample_b1: [
+          "What I like most about my neighbourhood is that it is quiet, safe and convenient.",
+          "The people who live there are friendly, and they are always willing to help one another.",
+          "There are several useful places nearby, such as a local market, some cafés and a school.",
+          "I can easily buy what I need without travelling far.",
+          "It is not too crowded, so it is a comfortable place for my family.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "What I appreciate most about my neighbourhood is its peaceful atmosphere and strong sense of community.",
+          "The residents are friendly and willing to support one another, which makes the area feel extremely welcoming.",
+          "It also has several convenient facilities, including a local market, cafés and schools, all of which are within walking distance.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "quiet, safe and convenient", vi: "yên tĩnh, an toàn và thuận tiện" },
+          { en: "willing to help one another", vi: "sẵn lòng giúp đỡ nhau" },
+          { en: "without travelling far", vi: "mà không cần đi xa" },
+          { en: "not too crowded", vi: "không quá đông đúc" }
+        ]
+      },
+      {
+        id: 36,
+        topic: "Future in Neighbourhood",
+        question: "Do you plan to live in your current neighbourhood for a long time? Why or why not?",
+        outline: [
+          "Khẳng định: Có, dự định sống lâu dài vì yên tĩnh, an toàn và tiện lợi.",
+          "Chi tiết: Hàng xóm thân thiện; gần chợ, quán cà phê và trường học.",
+          "Lý do kết: Gia đình thấy thoải mái nên không có lý do gì để chuyển đi."
+        ],
+        sample_b1: [
+          "Yes, I plan to live in my current neighbourhood for a long time because it is quiet, safe and convenient.",
+          "The people who live there are friendly, and they are always willing to help one another.",
+          "There are also several useful places nearby, such as a local market, some cafés and a school.",
+          "My family feels comfortable there, and I do not have any strong reason to move somewhere else.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Yes, I intend to remain in my current neighbourhood for the foreseeable future because it offers a peaceful atmosphere and a strong sense of community.",
+          "The residents are friendly, while essential facilities such as markets, cafés and schools are all within easy reach.",
+          "Although I might consider moving if I found a better career opportunity elsewhere, I am currently satisfied with the area.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "for a long time", vi: "trong một thời gian dài" },
+          { en: "feels comfortable there", vi: "cảm thấy thoải mái ở đó" },
+          { en: "any strong reason", vi: "bất kỳ lý do lớn nào" },
+          { en: "move somewhere else", vi: "chuyển đi nơi khác" }
+        ]
+      },
+      {
+        id: 37,
+        topic: "Going Out Frequency",
+        question: "Let’s talk about going out. How often do you go out?",
+        outline: [
+          "Tần suất: Thường ra ngoài 1-2 lần/tuần, nhất là vào cuối tuần.",
+          "Hoạt động: Đi cà phê, nhà hàng hoặc trung tâm mua sắm cùng gia đình, bạn thân.",
+          "Lợi ích: Giúp thư giãn sau tuần làm việc bận rộn và gắn kết tình cảm."
+        ],
+        sample_b1: [
+          "I usually go out once or twice a week, especially at weekends.",
+          "I often go to a café, a restaurant or a shopping centre with my family and close friends.",
+          "We normally have a meal, drink coffee and talk about our daily lives.",
+          "Going out helps me relax after a busy working week and spend quality time with the people I love.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I tend to go out once or twice a week, mainly at weekends when I have fewer work and study commitments.",
+          "I usually visit a café, restaurant or shopping centre with my family and close friends.",
+          "We often enjoy a meal and catch up on what has happened during the week.",
+          "Although I sometimes prefer staying at home, going out allows me to escape from my demanding routine.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "once or twice a week", vi: "một hoặc hai lần một tuần" },
+          { en: "talk about our daily lives", vi: "trò chuyện về cuộc sống hàng ngày" },
+          { en: "after a busy working week", vi: "sau một tuần làm việc bận rộn" },
+          { en: "spend quality time", vi: "dành thời gian chất lượng" }
+        ]
+      },
+      {
+        id: 38,
+        topic: "Favourite Film Star",
+        question: "Please tell me about your favourite film star. / Who is your favourite film star?",
+        outline: [
+          "Ngôi sao: Tom Cruise - diễn viên hành động nổi tiếng người Mỹ (phim Mission: Impossible).",
+          "Lý do ngưỡng mộ: Tài năng, chăm chỉ, tự tin, tự thực hiện các cảnh quay khó.",
+          "Cảm nhận: Phim chân thực, hấp dẫn, luôn thích xem vào lúc rảnh."
+        ],
+        sample_b1: [
+          "My favourite film star is Tom Cruise. He is a famous American actor who has appeared in many successful action films.",
+          "My favourite is the Mission: Impossible series because it has exciting stories and impressive action scenes.",
+          "I admire Tom Cruise because he is talented, hardworking and confident.",
+          "He often performs difficult scenes himself, which makes his films more realistic and entertaining.",
+          "I always enjoy watching his films in my free time.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "My favourite film star is Tom Cruise, who is widely regarded as one of the most successful action stars in the film industry.",
+          "He is best known for playing the leading role in the Mission: Impossible series.",
+          "What I admire most about him is his dedication, particularly his willingness to perform many challenging stunts himself.",
+          "His films always allow me to unwind while keeping me engaged from beginning to end.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "successful action films", vi: "những bộ phim hành động thành công" },
+          { en: "impressive action scenes", vi: "những cảnh hành động ấn tượng" },
+          { en: "talented, hardworking and confident", vi: "tài năng, chăm chỉ và tự tin" },
+          { en: "realistic and entertaining", vi: "chân thực và giàu tính giải trí" }
+        ]
+      },
+      {
+        id: 39,
+        topic: "Places When Going Out",
+        question: "Where do you often go when you go out?",
+        outline: [
+          "Địa điểm: Thường tới quán cà phê, nhà hàng hoặc trung tâm thương mại gần nhà.",
+          "Hoạt động: Đi cùng gia đình hoặc bạn thân vào cuối tuần để ăn uống, trò chuyện.",
+          "Cảm nhận: Tiện lợi, thoải mái, không quá xa nhà, giúp thư giãn."
+        ],
+        sample_b1: [
+          "When I go out, I often visit a café, a restaurant or a shopping centre near my house.",
+          "I usually go there with my family or close friends at weekends.",
+          "We have a meal, drink coffee and talk about our daily lives.",
+          "These places are convenient, comfortable and not too far from my home.",
+          "I enjoy visiting them because they help me relax and spend quality time with the people I love.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Whenever I go out, I tend to visit a quiet café, a local restaurant or a shopping centre within easy reach of my home.",
+          "I usually go with my family or close friends so that we can enjoy a meal and catch up on the week’s events.",
+          "Although crowded places can sometimes be exhausting, I enjoy locations with a relaxing atmosphere.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "near my house", vi: "gần nhà tôi" },
+          { en: "at weekends", vi: "vào dịp cuối tuần" },
+          { en: "not too far from my home", vi: "không quá xa nhà tôi" },
+          { en: "help me relax", vi: "giúp tôi thư giãn" }
+        ]
+      },
+      {
+        id: 40,
+        topic: "Special Place to Return",
+        question: "Now, let’s talk about a special place you would always want to return to. Can you describe that place?",
+        outline: [
+          "Địa điểm: Bãi biển yên bình gần quê với cát mềm, nước trong xanh và nhà hàng hải sản tươi.",
+          "Kỷ niệm: Đã đến đó cùng gia đình và bạn thân hè năm ngoái (bơi, ngắm hoàng hôn, chụp ảnh).",
+          "Lý do muốn quay lại: Giúp thư giãn và gợi nhắc những kỷ niệm hạnh phúc."
+        ],
+        sample_b1: [
+          "A special place that I would always like to return to is a peaceful beach near my hometown.",
+          "It has soft sand, clear blue water and many restaurants serving fresh seafood.",
+          "I visited it with my family and close friends last summer.",
+          "We swam, watched the sunset and took many beautiful photos together.",
+          "I would love to return because the beach helps me relax and reminds me of our happy memories.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "A special place that I would always like to revisit is a peaceful beach located near my hometown.",
+          "What makes it particularly attractive is its soft sand, clear water and spectacular view of the sunset.",
+          "I went there with my family and close friends last summer, and we spent several enjoyable days swimming and sampling local specialities.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a peaceful beach", vi: "một bãi biển yên bình" },
+          { en: "serving fresh seafood", vi: "phục vụ hải sản tươi sống" },
+          { en: "watched the sunset", vi: "ngắm hoàng hôn" },
+          { en: "reminds me of our happy memories", vi: "nhắc tôi nhớ về những kỷ niệm vui" }
+        ]
+      },
+      {
+        id: 41,
+        topic: "Visit Special Place With Whom",
+        question: "When you visit a special place, do you usually go alone or with other people?",
+        outline: [
+          "Lựa chọn: Thường đi cùng gia đình và bạn thân vì thích chia sẻ trải nghiệm mới.",
+          "Ví dụ: Hè năm ngoái đi biển gần quê, cùng bơi, ăn hải sản, ngắm hoàng hôn và chụp ảnh.",
+          "Lý do: Cảm thấy vui hơn, an toàn hơn và tạo được nhiều kỷ niệm đẹp."
+        ],
+        sample_b1: [
+          "I usually visit special places with my family and close friends because I enjoy sharing new experiences with them.",
+          "Last summer, we travelled to a peaceful beach near my hometown.",
+          "We swam in the sea, enjoyed fresh seafood and watched the sunset together.",
+          "We also took many beautiful photos.",
+          "I prefer travelling with other people because I feel happier and safer, and we can create many good memories together.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I normally visit special places with my family or close friends, as sharing an experience makes it much more meaningful.",
+          "For example, we travelled to a peaceful beach near my hometown last summer, where we swam and admired the sunset together.",
+          "Although travelling alone may offer greater freedom, I prefer having people around me because we can support one another.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "sharing new experiences", vi: "chia sẻ những trải nghiệm mới" },
+          { en: "watched the sunset together", vi: "cùng nhau ngắm hoàng hôn" },
+          { en: "feel happier and safer", vi: "cảm thấy vui hơn và an toàn hơn" },
+          { en: "create many good memories", vi: "tạo nhiều kỷ niệm đẹp" }
+        ]
+      },
+      {
+        id: 42,
+        topic: "Place to Visit Again",
+        question: "What kind of place would you like to visit again, and why?",
+        outline: [
+          "Loại địa điểm: Muốn thăm lại một bãi biển yên bình vì thích ở gần biển.",
+          "Mô tả & Hoạt động: Nước trong, cát mềm, hải sản tươi; bơi lội, ngắm hoàng hôn, chụp ảnh.",
+          "Lý do: Giúp thư giãn sau đợt bận rộn và có thời gian chất lượng bên người thân."
+        ],
+        sample_b1: [
+          "I would like to visit a peaceful beach again because I really enjoy spending time near the sea.",
+          "My ideal place would have clear water, soft sand and restaurants serving fresh seafood.",
+          "I could go swimming, watch the sunset and take beautiful photos with my family and friends.",
+          "Places like this help me relax after a busy period and give me opportunities to spend quality time with the people I love.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I would particularly like to revisit a peaceful coastal destination with clear water, beautiful scenery and a relaxing atmosphere.",
+          "It would be an ideal place to swim, sample local specialities and admire the sunset with my family and close friends.",
+          "Although travelling to the coast can be expensive during the holiday season, I believe the experience is worthwhile.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "spending time near the sea", vi: "dành thời gian ở gần biển" },
+          { en: "my ideal place", vi: "địa điểm lý tưởng của tôi" },
+          { en: "after a busy period", vi: "sau một khoảng thời gian bận rộn" },
+          { en: "spend quality time", vi: "dành thời gian chất lượng" }
+        ]
+      },
+      {
+        id: 43,
+        topic: "Going Walking",
+        question: "When and where do you usually go walking?",
+        outline: [
+          "Thời gian & Địa điểm: Cuối buổi chiều sau khi làm xong việc, tại công viên nhỏ gần nhà.",
+          "Chi tiết: Đi một mình hoặc cùng người thân khoảng 30 phút; công viên nhiều cây và yên tĩnh.",
+          "Lợi ích: Giúp giữ sức khỏe, giảm căng thẳng và thư giãn."
+        ],
+        sample_b1: [
+          "I usually go walking in the late afternoon when I have finished my work.",
+          "I often walk in a small park near my house, either alone or with a family member.",
+          "The park has many trees and a quiet atmosphere, so it is a pleasant place to exercise.",
+          "I normally walk for about thirty minutes.",
+          "This activity helps me stay healthy, reduce stress and relax after a busy day.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "I normally go for a walk in the late afternoon after completing most of my work and family responsibilities.",
+          "There is a peaceful park within walking distance of my house, where I usually exercise for approximately thirty minutes.",
+          "Although I occasionally walk alone, I prefer going with a family member because we can talk while exercising.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "in the late afternoon", vi: "vào cuối buổi chiều" },
+          { en: "a quiet atmosphere", vi: "bầu không khí yên tĩnh" },
+          { en: "walk for about thirty minutes", vi: "đi bộ khoảng 30 phút" },
+          { en: "stay healthy, reduce stress", vi: "giữ sức khỏe, giảm căng thẳng" }
+        ]
+      },
+      {
+        id: 44,
+        topic: "Importance of Walking",
+        question: "Do you think walking is important?",
+        outline: [
+          "Quan điểm: Rất quan trọng vì là cách đơn giản để giữ sức khỏe, không cần thiết bị đắt tiền.",
+          "Ví dụ: Thường đi bộ 30 phút ở công viên gần nhà để tập thể dục, giảm stress và ngủ ngon.",
+          "Kết luận: Đặc biệt hữu ích cho người bận rộn không có thời gian tới phòng gym."
+        ],
+        sample_b1: [
+          "Yes, I think walking is very important because it is a simple way to stay healthy.",
+          "People do not need any expensive equipment, and they can walk almost anywhere.",
+          "For example, I often walk for about thirty minutes in a park near my house.",
+          "It helps me exercise, reduce stress and sleep better at night.",
+          "Walking is especially useful for busy people who do not have enough time to go to a gym.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "Yes, I believe walking is extremely important because it benefits both physical and mental health.",
+          "Unlike many other forms of exercise, it does not require expensive equipment or a special location.",
+          "I usually walk for approximately thirty minutes in a park near my house.",
+          "Apart from helping me remain active, this habit enables me to reduce stress and sleep more comfortably.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "a simple way to stay healthy", vi: "cách đơn giản để giữ gìn sức khỏe" },
+          { en: "expensive equipment", vi: "thiết bị đắt tiền" },
+          { en: "sleep better at night", vi: "ngủ ngon hơn vào ban đêm" },
+          { en: "especially useful for busy people", vi: "đặc biệt hữu ích cho người bận rộn" }
+        ]
+      },
+      {
+        id: 45,
+        topic: "Walking Countryside vs City",
+        question: "Do you think walking in the countryside is better than walking in the city?",
+        outline: [
+          "Quan điểm: Đi bộ ở nông thôn tốt hơn ở thành phố vì không khí trong lành, ít xe cộ và cảnh đẹp.",
+          "Ví dụ & So sánh: Đi cạnh cánh đồng, hàng cây, bờ sông không ồn ào; thành phố tiện nhưng đông và ô nhiễm.",
+          "Kết luận: Thích nông thôn hơn vì môi trường yên bình giúp thư giãn."
+        ],
+        sample_b1: [
+          "Yes, I think walking in the countryside is better than walking in the city.",
+          "The countryside usually has fresher air, less traffic and more beautiful natural scenery.",
+          "For example, people can walk beside fields, trees or rivers without hearing too much noise.",
+          "Walking in the city may be more convenient, but it can also be crowded and polluted.",
+          "I prefer the countryside because its peaceful environment helps me relax and enjoy my walk.",
+          "That’s all I want to say. Thank you."
+        ],
+        sample_b2: [
+          "In my opinion, walking in the countryside is generally more enjoyable than walking in a busy city.",
+          "Since rural areas tend to have less traffic and pollution, walkers can breathe fresher air while appreciating the natural scenery.",
+          "Although cities may provide more convenient walking routes, they are often crowded and noisy.",
+          "I would therefore prefer the countryside because its peaceful surroundings allow me to clear my mind.",
+          "That’s all I want to say. Thank you."
+        ],
+        key_chunks: [
+          { en: "fresher air, less traffic", vi: "không khí trong lành hơn, ít giao thông hơn" },
+          { en: "beautiful natural scenery", vi: "phong cảnh thiên nhiên tươi đẹp" },
+          { en: "crowded and polluted", vi: "đông đúc và ô nhiễm" },
+          { en: "peaceful environment", vi: "môi trường yên bình" }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // TRẠNG THÁI ỨNG DỤNG & LOCAL STORAGE (SRS)
+    // =========================================================================
+    const STORAGE_KEY = "aptis_part1_srs_v1";
+    let srsState = {}; // { [id]: 'hard' | 'ok' | 'good' }
+    let currentIndex = 0;
+    let currentMode = "shadowing"; // 'shadowing' | 'exam'
+    let currentLevel = "B1"; // 'B1' | 'B2'
+    let outlineVisible = true;
+    let maskAllSentences = false;
+
+    // Timer & Audio Recording Variables
+    let examTimer = null;
+    let examTimeLeft = 30.0;
+    let audioCtx = null;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function loadSRS() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) srsState = JSON.parse(raw);
+      } catch (e) {
+        srsState = {};
+      }
+    }
+
+    function saveSRS() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(srsState));
+      } catch (e) {}
+      updateStatsUI();
+    }
+
+    function updateStatsUI() {
+      let hard = 0, ok = 0, good = 0;
+      APTIS_DATA.forEach(item => {
+        const st = srsState[item.id];
+        if (st === "hard") hard++;
+        else if (st === "ok") ok++;
+        else if (st === "good") good++;
+      });
+      document.getElementById("statHard").textContent = `Cần luyện lại: ${hard}`;
+      document.getElementById("statOk").textContent = `Tạm ổn: ${ok}`;
+      document.getElementById("statGood").textContent = `Thành thạo: ${good}`;
+    }
+
+    // =========================================================================
+    // KHỞI TẠO & RENDER GIAO DIỆN
+    // =========================================================================
+    function initApp() {
+      loadSRS();
+      populateSelector();
+      updateStatsUI();
+      renderQuestion();
+
+      document.getElementById("questionSelect").addEventListener("change", (e) => {
+        currentIndex = parseInt(e.target.value, 10);
+        stopSpeech();
+        stopExamSimulation(true);
+        renderQuestion();
+      });
+
+      document.getElementById("btnToggleLevel").addEventListener("click", () => {
+        currentLevel = currentLevel === "B1" ? "B2" : "B1";
+        document.getElementById("currentLevelText").textContent = currentLevel;
+        renderQuestion();
+      });
+    }
+
+    function populateSelector() {
+      const sel = document.getElementById("questionSelect");
+      sel.innerHTML = "";
+      APTIS_DATA.forEach((item, idx) => {
+        const st = srsState[item.id];
+        const icon = st === "hard" ? "🔴 " : st === "ok" ? "🟡 " : st === "good" ? "🟢 " : "";
+        const opt = document.createElement("option");
+        opt.value = idx;
+        opt.textContent = `${icon}Câu ${item.id}: ${item.topic} - ${item.question.substring(0, 38)}...`;
+        sel.appendChild(opt);
+      });
+      sel.value = currentIndex;
+    }
+
+    function escapeRegExp(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlightChunks(sentence, chunks) {
+      let result = sentence;
+      chunks.forEach(chunk => {
+        const regex = new RegExp(`(${escapeRegExp(chunk.en)})`, "gi");
+        result = result.replace(regex, `<span class="chunk-highlight">$1</span>`);
+      });
+      return result;
+    }
+
+    function renderQuestion() {
+      const item = APTIS_DATA[currentIndex];
+      document.getElementById("questionSelect").value = currentIndex;
+      document.getElementById("qTopic").textContent = `#${item.id} • ${item.topic}`;
+      document.getElementById("qText").textContent = item.question;
+
+      // Status Badge
+      const st = srsState[item.id];
+      const badge = document.getElementById("qStatusBadge");
+      if (st === "hard") {
+        badge.textContent = "🔴 Cần luyện lại";
+        badge.style.background = "#fef2f2";
+        badge.style.color = "#dc2626";
+      } else if (st === "ok") {
+        badge.textContent = "🟡 Tạm ổn";
+        badge.style.background = "#fffbeb";
+        badge.style.color = "#d97706";
+      } else if (st === "good") {
+        badge.textContent = "🟢 Thành thạo";
+        badge.style.background = "#ecfdf5";
+        badge.style.color = "#059669";
+      } else {
+        badge.textContent = "⚪ Chưa đánh giá";
+        badge.style.background = "#f1f5f9";
+        badge.style.color = "#64748b";
+      }
+
+      // SRS buttons active state
+      ["hard", "ok", "good"].forEach(k => {
+        const btn = document.getElementById("srs" + k.charAt(0).toUpperCase() + k.slice(1));
+        if (st === k) btn.classList.add("selected");
+        else btn.classList.remove("selected");
+      });
+
+      // Outline
+      const outlineBox = document.getElementById("outlineBox");
+      outlineBox.innerHTML = item.outline.map((step, i) => `
+        <div class="outline-step"><strong>Bước ${i + 1}:</strong> ${step}</div>
+      `).join("");
+
+      // Key Chunks
+      const chunksBox = document.getElementById("chunksBox");
+      chunksBox.innerHTML = item.key_chunks.map(c => `
+        <div class="chunk-item" onclick="speakText('${c.en.replace(/'/g, "\\'")}')">
+          <div>
+            <div class="chunk-en">🔊 ${c.en}</div>
+            <div class="chunk-vi">${c.vi}</div>
+          </div>
+        </div>
+      `).join("");
+
+      // Sentences (B1 or B2)
+      const sentences = currentLevel === "B1" ? item.sample_b1 : item.sample_b2;
+      const sentencesBox = document.getElementById("sentencesBox");
+      sentencesBox.innerHTML = sentences.map((s, idx) => `
+        <div class="sentence-item" id="sentItem_${idx}">
+          <div class="sentence-top">
+            <span class="sentence-num">Câu ${idx + 1}/${sentences.length} (${currentLevel})</span>
+            <div class="sentence-actions">
+              <button class="btn-sm" onclick="toggleMaskSentence(${idx})">👁️ Che/Hiện</button>
+              <button class="btn-sm primary" onclick="speakSentence(${idx})">🔊 Nghe mẫu</button>
+            </div>
+          </div>
+          <div class="sentence-text ${maskAllSentences ? 'masked' : ''}" id="sentText_${idx}">
+            ${highlightChunks(s, item.key_chunks)}
+          </div>
+        </div>
+      `).join("");
+
+      // Exam Sample Box
+      const examSampleBox = document.getElementById("examSampleBox");
+      examSampleBox.innerHTML = `<strong>Bài mẫu ${currentLevel}:</strong><br/>` +
+        sentences.map(s => highlightChunks(s, item.key_chunks)).join(" ");
+    }
+
+    function toggleOutline() {
+      outlineVisible = !outlineVisible;
+      const box = document.getElementById("outlineBox");
+      const btn = document.getElementById("btnToggleOutline");
+      if (outlineVisible) {
+        box.classList.remove("hidden");
+        btn.textContent = "Ẩn dàn ý";
+      } else {
+        box.classList.add("hidden");
+        btn.textContent = "Hiện dàn ý";
+      }
+    }
+
+    function toggleMaskSentence(idx) {
+      const el = document.getElementById(`sentText_${idx}`);
+      if (el) el.classList.toggle("masked");
+    }
+
+    function toggleMaskAll() {
+      maskAllSentences = !maskAllSentences;
+      document.getElementById("btnMaskAll").textContent = maskAllSentences ? "👀 Hiện toàn bộ" : "🙈 Che toàn bộ";
+      const item = APTIS_DATA[currentIndex];
+      const sentences = currentLevel === "B1" ? item.sample_b1 : item.sample_b2;
+      sentences.forEach((_, idx) => {
+        const el = document.getElementById(`sentText_${idx}`);
+        if (el) {
+          if (maskAllSentences) el.classList.add("masked");
+          else el.classList.remove("masked");
+        }
+      });
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      stopSpeech();
+      stopExamSimulation(true);
+      document.getElementById("tabMode1").classList.toggle("active", mode === "shadowing");
+      document.getElementById("tabMode2").classList.toggle("active", mode === "exam");
+      document.getElementById("modeShadowingSection").classList.toggle("hidden", mode !== "shadowing");
+      document.getElementById("modeExamSection").classList.toggle("hidden", mode !== "exam");
+    }
+
+    // =========================================================================
+    // WEB SPEECH API (PHÁT ÂM TIẾNG ANH CHUẨN TRÊN MOBILE & DESKTOP)
+    // =========================================================================
+    function stopSpeech() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      document.querySelectorAll(".sentence-item").forEach(el => el.classList.remove("playing"));
+    }
+
+    function getPreferredEnglishVoice() {
+      if (!("speechSynthesis" in window)) return null;
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || !voices.length) return null;
+      return (
+        voices.find(v => v.lang === "en-GB" && v.name.includes("Google")) ||
+        voices.find(v => v.lang === "en-US" && v.name.includes("Google")) ||
+        voices.find(v => v.lang === "en-GB") ||
+        voices.find(v => v.lang === "en-US") ||
+        voices.find(v => v.lang.startsWith("en"))
+      );
+    }
+
+    function speakText(text, onEndCallback) {
+      if (!("speechSynthesis" in window)) {
+        alert("Trình duyệt của bạn không hỗ trợ đọc văn bản (Web Speech API).");
+        return;
+      }
+      stopSpeech();
+      const utter = new SpeechSynthesisUtterance(text);
+      const voice = getPreferredEnglishVoice();
+      if (voice) utter.voice = voice;
+      utter.lang = voice ? voice.lang : "en-GB";
+      utter.rate = parseFloat(document.getElementById("voiceRateSelect").value || "0.95");
+      if (onEndCallback) utter.onend = onEndCallback;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakCurrentQuestion() {
+      const item = APTIS_DATA[currentIndex];
+      speakText(item.question);
+    }
+
+    function speakSentence(idx) {
+      const item = APTIS_DATA[currentIndex];
+      const sentences = currentLevel === "B1" ? item.sample_b1 : item.sample_b2;
+      const card = document.getElementById(`sentItem_${idx}`);
+      speakText(sentences[idx], () => {
+        if (card) card.classList.remove("playing");
+      });
+      if (card) card.classList.add("playing");
+    }
+
+    function playAllSentences() {
+      const item = APTIS_DATA[currentIndex];
+      const sentences = currentLevel === "B1" ? item.sample_b1 : item.sample_b2;
+      let i = 0;
+      function next() {
+        if (i >= sentences.length) return;
+        const idx = i;
+        i++;
+        const card = document.getElementById(`sentItem_${idx}`);
+        document.querySelectorAll(".sentence-item").forEach(el => el.classList.remove("playing"));
+        if (card) card.classList.add("playing");
+        speakText(sentences[idx], () => {
+          if (card) card.classList.remove("playing");
+          next();
+        });
+      }
+      next();
+    }
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.onvoiceschanged = () => getPreferredEnglishVoice();
+    }
+
+    // =========================================================================
+    // CHẾ ĐỘ 2: PHÒNG THI 30 GIÂY + BEEP 5S CUỐI + GHI ÂM MEDIARECORDER
+    // =========================================================================
+    function playBeep(freq = 880, duration = 120) {
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContextClass();
+        }
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration / 1000);
+      } catch (e) {}
+    }
+
+    async function startExamSimulation() {
+      stopSpeech();
+      stopExamSimulation(true);
+
+      // Khởi tạo ghi âm nếu trình duyệt hỗ trợ
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          recordedChunks = [];
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+          };
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: "audio/webm" });
+            const url = URL.createObjectURL(blob);
+            const audioEl = document.getElementById("recordedAudio");
+            audioEl.src = url;
+            document.getElementById("audioPlaybackBox").style.display = "block";
+            stream.getTracks().forEach(t => t.stop());
+          };
+          mediaRecorder.start();
+        } catch (err) {
+          // Vẫn chạy đồng hồ 30s ngay cả khi người dùng từ chối quyền Micro
+        }
+      }
+
+      document.getElementById("btnStartExam").classList.add("hidden");
+      document.getElementById("btnStopExam").classList.remove("hidden");
+      document.getElementById("closingReminder").style.display = "none";
+
+      examTimeLeft = 30.0;
+      let lastBeepSecond = 6;
+      playBeep(660, 150); // Beep bắt đầu
+
+      examTimer = setInterval(() => {
+        examTimeLeft = Math.max(0, examTimeLeft - 0.1);
+        const elapsed = 30.0 - examTimeLeft;
+        const percent = Math.min(100, (elapsed / 30.0) * 100);
+
+        document.getElementById("timerDisplay").textContent = examTimeLeft.toFixed(1) + "s";
+        const bar = document.getElementById("timerBar");
+        bar.style.width = percent + "%";
+
+        // Đổi màu thanh áp lực thời gian: Xanh (0-15s) -> Vàng (15-25s) -> Đỏ (25-30s)
+        if (elapsed < 15) {
+          bar.style.backgroundColor = "#10b981";
+        } else if (elapsed < 25) {
+          bar.style.backgroundColor = "#f59e0b";
+        } else {
+          bar.style.backgroundColor = "#ef4444";
+          document.getElementById("closingReminder").style.display = "block";
+          const secCeil = Math.ceil(examTimeLeft);
+          if (secCeil <= 5 && secCeil > 0 && secCeil < lastBeepSecond) {
+            lastBeepSecond = secCeil;
+            playBeep(920, 100);
+          }
+        }
+
+        if (examTimeLeft <= 0) {
+          playBeep(440, 350);
+          stopExamSimulation(false);
+        }
+      }, 100);
+    }
+
+    function stopExamSimulation(resetUI = false) {
+      if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+      }
+      if (mediaRecorder && mediaRecorder.state !== "inactive") {
+        try { mediaRecorder.stop(); } catch (e) {}
+      }
+      document.getElementById("btnStartExam").classList.remove("hidden");
+      document.getElementById("btnStopExam").classList.add("hidden");
+
+      if (resetUI) {
+        examTimeLeft = 30.0;
+        document.getElementById("timerDisplay").textContent = "30.0s";
+        const bar = document.getElementById("timerBar");
+        bar.style.width = "0%";
+        bar.style.backgroundColor = "#10b981";
+        document.getElementById("closingReminder").style.display = "none";
+      }
+    }
+
+    function toggleExamSample() {
+      document.getElementById("examSampleBox").classList.toggle("hidden");
+    }
+
+    // =========================================================================
+    // ĐIỀU HƯỚNG & THUẬT TOÁN ƯU TIÊN SRS
+    // =========================================================================
+    function rateCurrentQuestion(status) {
+      const item = APTIS_DATA[currentIndex];
+      srsState[item.id] = status;
+      saveSRS();
+      populateSelector();
+      renderQuestion();
+    }
+
+    function prevQuestion() {
+      stopSpeech();
+      stopExamSimulation(true);
+      currentIndex = (currentIndex - 1 + APTIS_DATA.length) % APTIS_DATA.length;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function nextQuestion() {
+      stopSpeech();
+      stopExamSimulation(true);
+      currentIndex = (currentIndex + 1) % APTIS_DATA.length;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function pickSmartRandom() {
+      stopSpeech();
+      stopExamSimulation(true);
+      // Ưu tiên cao cho câu "Cần luyện lại" (trọng số 5), câu chưa học (trọng số 3), "Tạm ổn" (trọng số 2), "Thành thạo" (trọng số 1)
+      const weightedPool = [];
+      APTIS_DATA.forEach((item, idx) => {
+        if (idx === currentIndex) return;
+        const st = srsState[item.id];
+        let weight = 3;
+        if (st === "hard") weight = 6;
+        else if (st === "ok") weight = 2;
+        else if (st === "good") weight = 1;
+        for (let i = 0; i < weight; i++) weightedPool.push(idx);
+      });
+      const randomIndex = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+      currentIndex = randomIndex;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.addEventListener("DOMContentLoaded", initApp);
+  </script>
+</body>
+</html>
